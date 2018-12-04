@@ -1,0 +1,128 @@
+Q1-how to set oracle with spring boot
+solution : 
+firstly i set maven on my system - than i install ojdbc6.jar to my local repositories.
+mvn install:install-file -Dfile=C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server\\jdbc\\lib\\ojdbc6.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0 -Dpackaging=jar
+
+inside pom.xml file
+        <!-- https://mvnrepository.com/artifact/oracle/ojdbc6 -->
+<dependency>
+    <groupId>com.oracle</groupId>
+    <artifactId>ojdbc6</artifactId>
+    <version>11.2.0</version>
+</dependency>
+**********************************************************************************************************************
+Q- handling null values from Table data
+as mgr and comm is having null inside emp table - how to handle null values
+otherwise we get error-
+solution:
+package com.icsd.model;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+//desc emp
+//Name     Null     Type         
+//-------- -------- ------------ 
+//EMPNO    NOT NULL NUMBER(4)    
+//ENAME             VARCHAR2(10) 
+//JOB               VARCHAR2(9)  
+//MGR               NUMBER(4)    
+//HIREDATE          DATE         
+//SAL               NUMBER(7,2)  
+//COMM              NUMBER(7,2)  
+//DEPTNO            NUMBER(2)
+
+@Entity
+@Table(name="emp")
+public class EmployeeModel 
+{
+	@Id
+	@Column(name="empno")
+	public int empno;
+	public String ename;
+	public String job;
+	public Integer mgr;//*********to handle null values - as mgr is having null value*********** 
+	public Date hiredate;
+	public double sal;
+	public Double comm;//**********to handle null values - as comm is having null value***************
+	public int deptno;
+	
+	public int getEmpno() {
+		return empno;
+	}
+	public void setEmpno(int empno) {
+		this.empno = empno;
+	}
+	public String getEname() {
+		return ename;
+	}
+	public void setEname(String ename) {
+		this.ename = ename;
+	}
+	public String getJob() {
+		return job;
+	}
+	public void setJob(String job) {
+		this.job = job;
+	}
+	public Integer getMgr() {//*********return type change to Integer as it can handle null value not int***************
+		return mgr;
+	}
+	public void setMgr(int mgr) {
+		this.mgr = mgr;
+	}
+	public Date getHiredate() {
+		return hiredate;
+	}
+	public void setHiredate(Date hiredate) {
+		this.hiredate = hiredate;
+	}
+	public double getSal() {
+		return sal;
+	}
+	public void setSal(double sal) {
+		this.sal = sal;
+	}
+	public Double getComm() {//***************getter data type is Double******************
+		return comm;
+	}
+	public void setComm(String comm) //***********************************
+	{
+		  if(null != Double.valueOf(comm)){//********************************************
+		        this.comm =Double.parseDouble(comm);
+
+		    }else{
+		        this.comm = 0.0;
+		    }
+		//this.comm = comm;
+	}
+	public int getDeptno() {
+		return deptno;
+	}
+	public void setDeptno(int deptno) {
+		this.deptno = deptno;
+	}
+	
+	
+}
+******************************************************************************************************
+
+inserting null into table using json post method
+i put
+    {
+        "empno": 13,
+        "ename": "SMITH",
+        "job": "CLERK",
+        "mgr": 7902,
+        "hiredate": "1980-12-16T18:30:00.000+0000",
+        "sal": 800,
+     
+        "deptno": 20
+    }
+   i have not entered comm at all
+   and it is workgin.
+ **************************************************
