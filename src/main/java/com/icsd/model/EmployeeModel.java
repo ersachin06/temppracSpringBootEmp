@@ -2,9 +2,12 @@ package com.icsd.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -39,8 +42,21 @@ public class EmployeeModel
 	 
 	
 	public Double comm;//to handle null values - as comm is having null value
-	public int deptno;
+	//public int deptno;
 	
+	
+	//@JoinColumn(name ="deptno")//it is parent - we specify here	
+	//@JoinColumn(name ="deptno")//it is parent - we specify here
+	public int deptno;
+	//public DeptModel deptModel;
+
+//	@ManyToOne(cascade=CascadeType.ALL)
+//	public DeptModel getDeptModel() {
+//		return deptModel;
+//	}
+//	public void setDeptModel(DeptModel deptModel) {
+//		this.deptModel = deptModel;
+//	}
 	public EmployeeModel()
 	{
 		super();
@@ -53,6 +69,32 @@ public class EmployeeModel
 	public void setEmpno(int empno) {
 		this.empno = empno;
 	}
+	public EmployeeModel(int empno, String ename, String job, Integer mgr, Date hiredate, double sal, Double comm,
+			int deptno) {
+		super();
+		this.empno = empno;
+		this.ename = ename;
+		this.job = job;
+		this.mgr = mgr;
+		this.hiredate = hiredate;
+		this.sal = sal;
+		this.comm = comm;
+		this.deptno = deptno;
+	
+	}
+//	public EmployeeModel(int empno, String ename, String job, Integer mgr, Date hiredate, double sal, Double comm,
+//			int deptno, DeptModel deptModel) {
+//		super();
+//		this.empno = empno;
+//		this.ename = ename;
+//		this.job = job;
+//		this.mgr = mgr;
+//		this.hiredate = hiredate;
+//		this.sal = sal;
+//		this.comm = comm;
+//		this.deptno = deptno;
+//		this.deptModel = deptModel;
+//	}
 	public String getEname() {
 		return ename;
 	}
@@ -119,5 +161,5 @@ public class EmployeeModel
 		this.deptno = deptno;
 	}
 	
-	
+
 }

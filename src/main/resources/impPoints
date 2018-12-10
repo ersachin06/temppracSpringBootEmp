@@ -1,3 +1,49 @@
+Stop the runing jar from cmd
+
+C:\Users\User>netstat -ano | find "8901"
+  TCP    127.0.0.1:8901         0.0.0.0:0              LISTENING       7776
+  TCP    127.0.0.1:8901         127.0.0.1:16483        TIME_WAIT       0
+  TCP    127.0.0.1:8901         127.0.0.1:16484        TIME_WAIT       0
+  TCP    127.0.0.1:8901         127.0.0.1:16485        TIME_WAIT       0
+  TCP    127.0.0.1:8901         127.0.0.1:16489        ESTABLISHED     7776
+  TCP    127.0.0.1:8901         127.0.0.1:16490        ESTABLISHED     7776
+  TCP    127.0.0.1:8901         127.0.0.1:16491        ESTABLISHED     7776
+  TCP    127.0.0.1:16489        127.0.0.1:8901         ESTABLISHED     2808
+  TCP    127.0.0.1:16490        127.0.0.1:8901         ESTABLISHED     2808
+  TCP    127.0.0.1:16491        127.0.0.1:8901         ESTABLISHED     2808
+
+
+C:\Users\User>taskkill /F /PID 7776
+SUCCESS: The process with PID 7776 has been terminated.
+
+C:\Users\User>
+*****************************************
+run jar file executable
+I:\doing\springboot\temp1prac>java -jar target\temp1prac-0.0.1-SNAPSHOT.jar
+**************************************************
+run jar file at different port we do
+
+I:\doing\springboot\temp1prac>java -jar target\temp1prac-0.0.1-SNAPSHOT.jar --se
+rver.port=9097
+**********************************************
+Skip Test
+2.1 skipTests & maven.test.skip
+We can control the testing when running Maven build through skipTests or maven.test.skip properties.
+
+How to use? -> We use them via commandlines: mvn clean install -DskipTests 
+or 
+mvn clean install -Dmaven.test.skip=true
+
+What is the difference between them?
+**************************************************
+for oauth2
+Name Web client1
+client secret
+
+nCKkNQIcsLmbI6w2g8Eai06l
+client id
+706910301258-2k2eaorrqrtl5ce39tqk25ktviglvf93.apps.googleusercontent.com
+*********************************************************
 Q1-how to set oracle with spring boot
 solution : 
 firstly i set maven on my system - than i install ojdbc6.jar to my local repositories.

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.icsd.model.DeptnoWiseSum;
 import com.icsd.model.EmployeeModel;
 import com.icsd.servicei.EmployeeService;
 
@@ -25,12 +25,69 @@ public class EmpController
 	@Autowired
 	 EmployeeService empservice;
 //	
+	@RequestMapping("/getGrpByDeptno")
+	public List<DeptnoWiseSum> getGroupByDeptno()
+	{
+		//customised query
+		return empservice.groupByDeptno();
+	}
+
+	@RequestMapping("/getOneQueryAnn")
+	public EmployeeModel getFindOneQueryAnn()
+	{
+		//customised query
+		return empservice.findOne("KING");
+	}
+	
+	
 	@RequestMapping("/getTemp")
 	public String getTemp()
 	{
 		return "hello icsd tech labs";
 	}
+	@GetMapping("/getEmployeesByDeptnoOrderByySalAsc")
+	public List<EmployeeModel> getEmployeeByDeptnoOrderBySalAsc()
+	{
+		
+		return empservice.getEmployeeByDeptnoOrderBySalAsc(10);
+		
+	}
+	@GetMapping("/getEmployeeByEname")
+	public List<EmployeeModel> getEmployeesByEname()
+	{
+		
+		return empservice.getEmployeeByEname("SMITH");
+		
+	}
 	
+	@GetMapping("/getEmpContainsEnameLIKE")
+	public List<EmployeeModel> getEmpContainsEnameLIKE()
+	{
+		
+		return empservice.getEmpContainsEnameLIKE("T");
+		
+	}
+	@GetMapping("/getEmployeeByEnameIgnoreCase")
+	public List<EmployeeModel> getEmployeesByEnameIgnoreCase()
+	{
+		
+		return empservice.getEmployyeByEnameIgnoreCase("smith");
+		
+	}
+	@GetMapping("/getEmployeeByMgrAndDeptno")
+	public List<EmployeeModel> getDsitinctEmployeeByMgrAndDeptno()
+	{
+		
+		return empservice.getDistinctEmployeeByMgrAndDeptno(7698, 30);
+		
+	}
+	@GetMapping("/getEmpByMgrDeptno")
+	public List<EmployeeModel> getEmployeesByMgrAndDeptno()
+	{
+		
+		return empservice.getEmployeeByMgrAndDeptno(7698, 30);
+		
+	}
 	@GetMapping("/employees")
 	public List<EmployeeModel> getEmployeeList()
 	{System.out.println("insidde get");
@@ -75,3 +132,5 @@ public class EmpController
 		
 	}
 }
+
+

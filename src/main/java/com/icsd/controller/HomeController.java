@@ -1,5 +1,7 @@
 package com.icsd.controller;
 
+import java.security.Principal;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,5 +26,11 @@ public class HomeController
 	public String getUser2(@RequestParam(value="name2")  String strName)
 	{
 		return "Welcome "+ strName;
+	}
+	
+	@RequestMapping(value="/user")
+	public Principal getUser3(Principal principal)
+	{
+		return principal;
 	}
 }
